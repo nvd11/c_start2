@@ -11,9 +11,9 @@
 int i;
 
 int main(){
-	//i = sort(); // sort.h
+	i = sort(); // sort.h
 	//i = array_main(); // array.h
-	i = array1_main(); // array.h
+	//i = array1_main(); // array.h
 	//i = memory_main(); // memory.h 
  
 
