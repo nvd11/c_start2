@@ -9,7 +9,9 @@ int sort(){
 	//int arr[10] = {0 ,2, 3, 1, 4, 5, 6, 7, 8, 9};
 	printArrInt(arr, 10);
 	//genericSort(arr, 10);
-	bubbleSort(arr, 10);
+	//bubbleSort(arr, 10);
+	//simpleSelectionSort(arr, 10);
+	simpleSelectionSortDebug(arr, 10);
 	printArrInt(arr, 10);
 	return 0;
 }
@@ -46,13 +48,19 @@ int bubbleSort(int * arr, int len){
 	count = 0;
 	count2 = 0;
 
+	int chgFlag = 1;
 	for (i = 0; i < len - 1; i++) {
+		if (chgFlag == 0){
+			break;
+		}
+		chgFlag = 0;
 		for (j = len -1; j > i; j--) {
 			count++;
 			if (arr[j-1] > arr[j]) {
 				count2++;
 				swap(arr, j, j-1);
-				printf("step %d: changing: ", count);
+				chgFlag = 1;
+				printf("step %d: changed: ", count);
 				printArrIntHl(arr, len, j-1, j);
 			}
 		}
@@ -60,3 +68,54 @@ int bubbleSort(int * arr, int len){
 	printf("change count: %d\n", count2);
 	printf("compare count: %d\n", count);
 }
+
+//simple selection sort
+int simpleSelectionSort(int * arr, int len){
+	int i,j;
+	int min;
+
+	for (i = 0; i < len -1; i++){
+		min = i; //first make the first element to be the min
+		for (j = i+1; j < len; j++){
+			if (arr[j] < arr[min]){
+				min = j;
+			}
+		}
+
+		//then the arr[j] is the min element in the loop
+		if (i != min){
+			swap(arr, i, min);
+		}
+	}
+
+}
+
+int simpleSelectionSortDebug(int * arr, int len){
+	int i,j;
+	int min;
+	int count = 0;
+	int count2 = 0;
+
+	for (i = 0; i < len -1; i++){
+		min = i; //first make the first element to be the min
+		for (j = i+1; j < len; j++){
+			count2++;
+			if (arr[j] < arr[min]){
+				min = j;
+			}
+		}
+
+		//then the arr[j] is the min element in the loop
+		if (i != min){
+			swap(arr, i, min);
+			printf("step %d: changed: ", count);
+			count++;
+		}
+		printArrIntHl(arr, len, j-1, j);
+	}
+	printf("change count: %d\n", count2);
+	printf("compare count: %d\n", count);
+
+}
+
+
