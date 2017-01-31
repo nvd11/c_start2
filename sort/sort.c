@@ -2,6 +2,9 @@
 #include "globalFunc.h"
 #include "array_funcs.h"
 
+static int _swap(int *, int, int);
+static int simpleSelectionSortDebug(int *, int);
+
 int sort(){
 	printf("it's sort\n");
 	//int arr[9] = {9, 1, 5, 8, 3, 7, 4, 6, 2};
@@ -25,7 +28,7 @@ int genericSort(int * arr, int len){
 			count++; // just use for debug msg
 			if (arr[j] < arr[i]){
                 count2++; // just use for debug msg
-				swap(arr, i, j);
+				_swap(arr, i, j);
                 printf("step %d: changing: ", count); // just use for debug msg
 				printArrIntHl(arr, len, i, j); // just use for debug msg
 			}
@@ -37,7 +40,7 @@ int genericSort(int * arr, int len){
 	return 0;
 }
 
-int swap(int * arr, int i, int j){
+static int _swap(int * arr, int i, int j){
 	int iTmp = arr[i];
 	arr[i] = arr[j];
 	arr[j] = iTmp;
@@ -58,7 +61,7 @@ int bubbleSort(int * arr, int len){
 			count++;
 			if (arr[j-1] > arr[j]) {
 				count2++;
-				swap(arr, j, j-1);
+				_swap(arr, j, j-1);
 				chgFlag = 1;
 				printf("step %d: changed: ", count);
 				printArrIntHl(arr, len, j-1, j);
@@ -84,7 +87,7 @@ int simpleSelectionSort(int * arr, int len){
 
 		//then the arr[j] is the min element in the loop
 		if (i != min){
-			swap(arr, i, min);
+			_swap(arr, i, min);
 		}
 	}
 
@@ -107,7 +110,7 @@ int simpleSelectionSortDebug(int * arr, int len){
 
 		//then the arr[j] is the min element in the loop
 		if (i != min){
-			swap(arr, i, min);
+			_swap(arr, i, min);
 			printf("step %d: changed: ", count);
 			count++;
 		}
