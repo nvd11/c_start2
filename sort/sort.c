@@ -12,7 +12,7 @@ int sort(){
 	printf("it's sort\n");
 	//int arr[9] = {9, 1, 5, 8, 3, 7, 4, 6, 2};
 	int arr[10] = {4, 1, 5, 8, 0, 3, 7, 9, 6, 2};
-	//int arr[10] = {0 ,2, 3, 1, 4, 5, 6, 7, 8, 9};
+	//int arr[5] = {5 ,4, 3, 2, 1};
 	printArrInt(arr, 10);
 	//genericSort(arr, 10);
 	//bubbleSort(arr, 10);
@@ -137,11 +137,13 @@ int straightInsertionSort(int * arr, int len){
 								//2. the element only will be moved forward.
 			tmp = arr[i]; //use a variable to store the element which will be moved.
 			j = i - 1;
-            while (j >= 0 && arr[j] > tmp){  // all the elements after the new position of the moving element
-				arr[j + 1] = arr[j];		 //	will be move one position backward.
-				j--;
+			do {
+				arr[j + 1] = arr[j];		 //move the previous element one position backward fisrt;
+                j--;
 			}
-			arr[j + 1] = tmp;
+			while (j >= 0 && arr[j] > tmp);  // all the elements after the new position of the moving element move!
+
+			arr[j + 1] = tmp;                //put the moving element to the new position
 		}
 	}
 	return 0;
@@ -159,17 +161,15 @@ static int straightInsertionSortDebug(int * arr, int len){
 		if (arr[i-1] > arr[i]){
 			tmp = arr[i];
 			j = i - 1;
-			while (j >= 0 && arr[j] > tmp){
-                count ++;
-				count2 ++;
-				arr[j + 1] = arr[j];
-                printf("tmp %d: array: ", tmp);
-				printArrIntHl(arr, 10, j+1, j);
+			do {
+				arr[j + 1] = arr[j];		 //move the previous element one position backward fisrt;
 				j--;
+				count2 ++;
 			}
-			count ++;
+			while (j >= 0 && arr[j] > tmp && count++);  // all the elements after the new position of the moving element move!
 			arr[j + 1] = tmp;
-			printArrIntHl(arr, 10, j+1, j+1);
+            count2++;
+			printArrIntHl(arr, len, j+1, j+1);
 		}
 	}
 	printf("change count: %d\n", count2);
